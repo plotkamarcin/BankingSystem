@@ -6,11 +6,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JMenuBar;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainAppWindow extends JFrame {
 
@@ -31,6 +41,30 @@ public class MainAppWindow extends JFrame {
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		
+		JMenu mnFile = new JMenu("File");
+		menuBar.add(mnFile);
+		
+		JMenuItem mntmExit = new JMenuItem("Exit");
+		mntmExit.addActionListener(listener->{
+			System.exit(0);
+		});
+		mnFile.add(mntmExit);
+		
+		JMenu mnOperations = new JMenu("Operations");
+		menuBar.add(mnOperations);
+		
+		JMenu mnAbout = new JMenu("About");
+		menuBar.add(mnAbout);
+		
+		JMenuItem mntmAuthors = new JMenuItem("Authors");
+		mntmAuthors.addActionListener(listener-> {			
+				JOptionPane.showMessageDialog(this, "AUTHOR: \nMarcin P³otka \nZaawansowana Java 2015", "About",JOptionPane.INFORMATION_MESSAGE);		
+			}
+		);
+		
+
+		mnAbout.add(mntmAuthors);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
