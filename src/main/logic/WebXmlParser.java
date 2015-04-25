@@ -1,11 +1,15 @@
 package logic;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.*;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+
+import data.Currency;
 
 public class WebXmlParser {
 	
@@ -22,8 +26,16 @@ public class WebXmlParser {
 		document.getDocumentElement().normalize();
 	}
 	
-	public void parseFromXml() throws ParserConfigurationException, SAXException, IOException {
+	private String parseFieldFromXml(Element e, String fieldName){
+		NodeList list = e.getElementsByTagName(fieldName);
+        Element element = (Element) list.item(0);
+        Node name = element.getChildNodes().item(0);
+        System.out.println(name.getNodeValue());
+        return name.getNodeValue();
+	}
+	public String parseFromXml() throws ParserConfigurationException, SAXException, IOException {
 		prepareToParse();	
+		String temp=null;
 		NodeList items = document.getElementsByTagName("pozycja");
         for (int i = 0; i < items.getLength(); i++)
         {
@@ -32,22 +44,31 @@ public class WebXmlParser {
                 continue;
             Element e = (Element) n;
             //get currency name
-            NodeList nameList = e.getElementsByTagName("nazwa_waluty");
-            Element nameElement = (Element) nameList.item(0);
-            Node nameNode = nameElement.getChildNodes().item(0);
-            System.out.println(nameNode.getNodeValue());
+            temp+=parseFieldFromXml(e, "nazwa_waluty");
             
             //get currency code
-            NodeList currencyCodeList = e.getElementsByTagName("kod_waluty");
-            Element currencyCodeElement = (Element) currencyCodeList.item(0);
-            Node currencyCodeNode = currencyCodeElement.getChildNodes().item(0);
-            System.out.println(currencyCodeNode.getNodeValue());
+            temp+=parseFieldFromXml(e, "kod_waluty");
             
             //get exchange rate
-            NodeList exchangeRateList = e.getElementsByTagName("kurs_sredni");
-            Element exchangeRateElement = (Element) exchangeRateList.item(0);
-            Node exchangeRateNode = exchangeRateElement.getChildNodes().item(0);
-            System.out.println(exchangeRateNode.getNodeValue());
+            temp+=parseFieldFromXml(e, "kurs_sredni");
         }
+        return temp;
 	}
+	public List<Currency> parseCurrenciesFromXml() throws ParserConfigurationException, SAXException, IOException{
+		ArrayList<Currency> temp = new ArrayList<Currency>();
+		prepareToParse();	
+		NodeList items = document.getElementsByTagName("pozycja");
+        for (int i = 0; i < items.getLength(); i++)
+        {
+            Node n = items.item(i);
+            if (n.getNodeType() != Node.ELEMENT_NODE)
+                continue;
+            Element e = (Element) n;
+            temp.add(new Currency(parseFieldFromXml(e, "nazwa_waluty"),parseFieldFromXml(e, "kod_waluty"),parseFieldFromXml(e, "kurs_sredni")));
+        }
+		
+		return temp;
+	}
+
+
 }
