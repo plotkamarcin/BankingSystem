@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="D:/eclipse-java-luna-R-win32-x86_64/eclipse/plugins/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="D:/eclipse-java-luna-R-win32-x86_64/eclipse/plugins/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="D:/eclipse-java-luna-R-win32-x86_64/eclipse/plugins/hsqldb.jar"/>
+	<classpathentry kind="lib" path="D:/eclipse-java-luna-R-win32-x86_64/eclipse/plugins/pdfbox-app-1.8.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
