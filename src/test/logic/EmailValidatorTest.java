@@ -48,8 +48,8 @@ public class EmailValidatorTest {
 
 	@Test
 	public void testSendVerificationEmail() throws AddressException, MessagingException {
-		//emailValidator.setMailServerProperties();
-		//emailValidator.sendVerificationEmail("igor.avz@gmail.com", "testToken");
+		emailValidator.setMailServerProperties();
+		emailValidator.sendVerificationEmail("igor.avz@gmail.com", "testToken");
 	}
 
 }

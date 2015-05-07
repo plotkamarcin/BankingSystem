@@ -4,15 +4,10 @@
 	<classpathentry kind="src" path="src/test"/>
 	<classpathentry kind="src" path="libs"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/commons-lang-2.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/hamcrest-all-1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/hsqldb.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/jackcess-2.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/javax.mail.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/javax.mail-1.5.3.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/mockito-all-1.9.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/mock-javamail-1.9.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/pdfbox-app-1.8.9.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/ucanaccess-2.0.9.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
