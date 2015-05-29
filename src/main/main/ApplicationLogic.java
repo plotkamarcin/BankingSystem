@@ -3,21 +3,30 @@ package main;
 import gui.MainAppWindow;
 import data.*;
 
+
 import java.awt.Component;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.security.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
+
 
 import javax.swing.JOptionPane;
 import javax.xml.parsers.ParserConfigurationException;
 
+
 import org.xml.sax.SAXException;
+
 
 import logic.*;
 
 public class ApplicationLogic {
 private ApplicationData data;
 private ApplicationGui gui;
+
+private ArrayList<Currency> currencies;
+
 private ConnectionChecker connectionChecker;
 private BankPdfGenerator pdfGenerator;
 private DatabaseOperator database;
@@ -30,11 +39,12 @@ private WebXmlParser xmlParser;
 
 private void initialise(){
 	connectionChecker = new ConnectionChecker();
+	pdfGenerator = new BankPdfGenerator();
 	xmlParser = new WebXmlParser();
 }
 
 private void displayCurrencies(ApplicationGui gui) {
-	ArrayList<Currency> currencies = new ArrayList<Currency>();
+	currencies = new ArrayList<Currency>();
 	try {
 		currencies =xmlParser.parseCurrenciesFromXml();
 	} catch (ParserConfigurationException e1) {} 
@@ -63,6 +73,19 @@ private void displayConnectionStatus(ApplicationGui gui) {
 	catch (IOException e) {}
 }
 
+private void addActionListeners(ApplicationGui gui){
+	gui.mainWindow.mntmGeneratePdf.addActionListener(listener->{
+		Date date = new Date();
+		if(gui.mainWindow.tabbedPane.getSelectedIndex()==3){
+			String pdfString="";
+			for(Currency c:currencies){
+				pdfString+=c.toString();
+			}
+			pdfString+="/n/n GENERATED: "+ date.toString(); 
+			pdfGenerator.generateBankPdfWithContent(pdfString, "exchange_rates.pdf");
+		}
+	});
+}
 public ApplicationLogic(ApplicationData data, ApplicationGui gui){
 	this.data=data;
 	this.gui=gui;	
@@ -70,7 +93,7 @@ public ApplicationLogic(ApplicationData data, ApplicationGui gui){
 	gui.mainWindow = new MainAppWindow();
 	gui.mainWindow.setVisible(true);
 	gui.mainWindow.setResizable(false);
-	
+	addActionListeners(gui);
 	displayCurrencies(gui);
 	displayConnectionStatus(gui);
 }

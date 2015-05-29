@@ -3,6 +3,8 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,11 +13,21 @@ import javax.swing.JTabbedPane;
 import javax.swing.JMenuBar;
 import javax.swing.JLabel;
 
+
+
 import java.awt.Font;
+
+
 
 import javax.swing.SwingConstants;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
+
+
+import main.ApplicationLogic;
+
+import main.BankingSystem;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +47,8 @@ public class MainAppWindow extends JFrame {
 	public JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	public JLabel lblCurrencyRates = new JLabel("");
 	public JLabel lblCurrencyRates2 = new JLabel("");
+	
+	public JMenuItem mntmGeneratePdf = new JMenuItem("Generate PDF");
 	/**
 	 * Create the frame.
 	 */
@@ -58,6 +72,8 @@ public class MainAppWindow extends JFrame {
 		
 		JMenu mnOperations = new JMenu("Operations");
 		menuBar.add(mnOperations);
+		
+		mnOperations.add(mntmGeneratePdf);
 		
 		JMenu mnAbout = new JMenu("About");
 		menuBar.add(mnAbout);
