@@ -37,7 +37,7 @@ public class BankPdfGenerator {
 	public void generateBankPdfWithContent(String documentContent, String filename){
 		 PDDocument doc = null;
 	        PDPage page = null;
-
+	        String lines[] = documentContent.split("\\r?\\n");
 	       try{
 	           doc = new PDDocument();
 	           page = new PDPage();
@@ -47,9 +47,12 @@ public class BankPdfGenerator {
 
 	           PDPageContentStream content = new PDPageContentStream(doc, page);
 	           content.beginText();
-	           content.setFont( font, 10 );
-	           content.moveTextPositionByAmount( 100, 700 );
-	           content.drawString(documentContent);
+	           content.moveTextPositionByAmount(100,750);
+	           for(int i=0;i<lines.length;i++){
+	        	   content.setFont( font, 10 );
+	        	   content.moveTextPositionByAmount(0, -15);
+	        	   content.drawString(lines[i]);
+	           }
 	           content.endText();
 	           content.close();
 	          doc.save(filename);

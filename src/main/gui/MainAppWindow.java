@@ -80,8 +80,8 @@ public class MainAppWindow extends JFrame {
 		
 		JMenuItem mntmAuthors = new JMenuItem("Authors");
 		mntmAuthors.addActionListener(listener-> {			
-				JOptionPane.showMessageDialog(this, "AUTHOR: \nMarcin P³otka \nZaawansowana Java 2015", "About",JOptionPane.INFORMATION_MESSAGE);		
-			}
+			JOptionPane.showMessageDialog(this, "AUTHOR: \nMarcin P³otka \nZaawansowana Java 2015", "About",JOptionPane.INFORMATION_MESSAGE);		
+		}
 		);
 		
 

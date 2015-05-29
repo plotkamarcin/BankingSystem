@@ -81,7 +81,7 @@ private void addActionListeners(ApplicationGui gui){
 			for(Currency c:currencies){
 				pdfString+=c.toString();
 			}
-			pdfString+="/n/n GENERATED: "+ date.toString(); 
+			pdfString+="GENERATED: "+ date.toString(); 
 			pdfGenerator.generateBankPdfWithContent(pdfString, "exchange_rates.pdf");
 		}
 	});

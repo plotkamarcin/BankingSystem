@@ -18,7 +18,7 @@ public class BankPdfGeneratorTest {
 
 	@Test
 	public void testGenerateBankPdfWithContent() throws Exception {
-		throw new RuntimeException("not yet implemented");
+		sut.generateBankPdfWithContent("content", "test.pdf");
 	}
 
 }
