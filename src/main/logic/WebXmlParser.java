@@ -30,7 +30,7 @@ public class WebXmlParser {
 		NodeList list = e.getElementsByTagName(fieldName);
         Element element = (Element) list.item(0);
         Node name = element.getChildNodes().item(0);
-        System.out.println(name.getNodeValue());
+        //System.out.println(name.getNodeValue());
         return name.getNodeValue();
 	}
 	public String parseFromXml() throws ParserConfigurationException, SAXException, IOException {
@@ -45,16 +45,17 @@ public class WebXmlParser {
             Element e = (Element) n;
             //get currency name
             temp+=parseFieldFromXml(e, "nazwa_waluty");
-            
+            temp+="  ";
             //get currency code
             temp+=parseFieldFromXml(e, "kod_waluty");
-            
+            temp+="  ";
             //get exchange rate
             temp+=parseFieldFromXml(e, "kurs_sredni");
+            temp+="<br>";
         }
         return temp;
 	}
-	public List<Currency> parseCurrenciesFromXml() throws ParserConfigurationException, SAXException, IOException{
+	public ArrayList<Currency> parseCurrenciesFromXml() throws ParserConfigurationException, SAXException, IOException{
 		ArrayList<Currency> temp = new ArrayList<Currency>();
 		prepareToParse();	
 		NodeList items = document.getElementsByTagName("pozycja");

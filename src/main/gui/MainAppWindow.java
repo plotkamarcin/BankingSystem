@@ -30,6 +30,11 @@ public class MainAppWindow extends JFrame {
 	private static final long serialVersionUID = 4257597890864217058L;
 	private JPanel contentPane;
 
+	
+	public JLabel lblConnetion = new JLabel("OFFLINE");
+	public JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+	public JLabel lblCurrencyRates = new JLabel("");
+	public JLabel lblCurrencyRates2 = new JLabel("");
 	/**
 	 * Create the frame.
 	 */
@@ -74,7 +79,7 @@ public class MainAppWindow extends JFrame {
 		panel.setBounds(0, 0, 784, 25);
 		contentPane.add(panel);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+
 		tabbedPane.setBounds(0, 25, 784, 497);
 		contentPane.add(tabbedPane);
 		
@@ -88,17 +93,31 @@ public class MainAppWindow extends JFrame {
 		tabbedPane.addTab("INVESTMENTS", null, panel_4, null);
 		
 		JPanel panel_5 = new JPanel();
-		tabbedPane.addTab("OPERATIONS", null, panel_5, null);
+		tabbedPane.addTab("EXCHANGE", null, panel_5, null);
+		panel_5.setLayout(null);
+		
+
+		lblCurrencyRates.setVerticalAlignment(SwingConstants.TOP);
+		lblCurrencyRates.setBounds(10, 81, 414, 377);
+		panel_5.add(lblCurrencyRates);
+		
+
+		lblCurrencyRates2.setVerticalAlignment(SwingConstants.TOP);
+		lblCurrencyRates2.setBounds(432, 81, 347, 377);
+		panel_5.add(lblCurrencyRates2);
+		
+		JLabel lblDataProvidedBy = new JLabel("Data provided by National Bank of Poland");
+		lblDataProvidedBy.setBounds(10, 11, 305, 39);
+		panel_5.add(lblDataProvidedBy);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 519, 784, 21);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("OFFLINE");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel.setBounds(707, 0, 67, 21);
-		panel_1.add(lblNewLabel);
+		lblConnetion.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblConnetion.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblConnetion.setBounds(568, 3, 206, 15);
+		panel_1.add(lblConnetion);
 	}
 }

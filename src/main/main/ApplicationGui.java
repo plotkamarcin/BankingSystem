@@ -1,17 +1,19 @@
 package main;
 
 
+import gui.EmailVerification;
+import gui.LoginScreen;
 import gui.MainAppWindow;
 
 import java.util.*;
 
 public class ApplicationGui {
 	
-	private MainAppWindow  mainWindow;
-	
+	public MainAppWindow  mainWindow;
+    public LoginScreen loginScreen;
+    public EmailVerification emailVerification;
+
 	public ApplicationGui(){
-		mainWindow = new MainAppWindow();
-		mainWindow.setVisible(true);
 	}
 
 }

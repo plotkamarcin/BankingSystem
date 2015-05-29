@@ -37,7 +37,7 @@ public class Currency {
 
 	@Override
 	public String toString() {
-		return name + " " + code + " " + exchangeRate;
+		return name + " " + code + " " + exchangeRate +"\n";
 	}
 
 	@Override

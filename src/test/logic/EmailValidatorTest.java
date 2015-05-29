@@ -6,11 +6,6 @@ import static org.mockito.Matchers.isNotNull;
 
 import javax.mail.MessagingException;
 import javax.mail.Session;
-
-
-
-
-
 import javax.mail.internet.AddressException;
 
 import org.hamcrest.core.IsNot;
