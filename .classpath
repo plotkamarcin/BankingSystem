@@ -10,5 +10,9 @@
 	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/mockito-all-1.9.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/pdfbox-app-1.8.9.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/ucanaccess-2.0.9.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/jackcess-2.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/hsqldb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Igorek/git/BankingSystem/libs/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

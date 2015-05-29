@@ -7,8 +7,7 @@ public class Customer {
 	private String surname;
 	private String city;
 	private String street;
-	private int socialId;
-	private int yearOfBirth;
+	private String socialId;
+	private String yearOfBirth;
 	boolean isActive=false;
-	private int accountNumber;
 }

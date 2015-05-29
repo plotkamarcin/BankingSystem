@@ -3,6 +3,6 @@ package data;
 public class BankAccount {
 
 	private Customer owner;
-	private long accountNumber;
+	private String accountNumber;
 	private double balance;
 }
