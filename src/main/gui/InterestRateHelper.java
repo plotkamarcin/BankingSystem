@@ -65,6 +65,19 @@ public class InterestRateHelper extends JDialog {
 		spinner.setModel(new SpinnerListModel(new String[] {"1", "2", "3", "6", "12", "24"}));
 		spinner.setBounds(66, 52, 39, 29);
 		contentPanel.add(spinner);
+		
+		JButton btnGraph = new JButton("Graph");
+		btnGraph.setBounds(335, 150, 89, 23);
+		contentPanel.add(btnGraph);
+		
+		JLabel lblOffer = new JLabel("Offer");
+		lblOffer.setBounds(10, 97, 46, 14);
+		contentPanel.add(lblOffer);
+		
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerListModel(new String[] {"Standard", "Premium", "Internet", "Business"}));
+		spinner_1.setBounds(66, 92, 90, 20);
+		contentPanel.add(spinner_1);
 		{
 			JPanel buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);

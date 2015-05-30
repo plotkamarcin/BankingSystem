@@ -27,7 +27,6 @@ public void init(){
 	public void shouldGenerateTokenWith4Numbers() throws Exception {
 		String temp="";
 		temp=sut.generateToken(4);
-		System.out.println(temp);
 		assertThat(temp.length(),is(4));
 		
 	}

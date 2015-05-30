@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 
 
 
+import java.awt.LayoutManager;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,7 +17,9 @@ import javax.swing.JLabel;
 
 
 
+
 import java.awt.Font;
+
 
 
 
@@ -25,14 +29,18 @@ import javax.swing.JMenuItem;
 
 
 
-import main.ApplicationLogic;
 
+import main.ApplicationLogic;
 import main.BankingSystem;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class MainAppWindow extends JFrame {
 
@@ -49,6 +57,7 @@ public class MainAppWindow extends JFrame {
 	public JLabel lblCurrencyRates2 = new JLabel("");
 	
 	public JMenuItem mntmGeneratePdf = new JMenuItem("Generate PDF");
+	private JTable table;
 	/**
 	 * Create the frame.
 	 */
@@ -107,6 +116,26 @@ public class MainAppWindow extends JFrame {
 		
 		JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("INVESTMENTS", null, panel_4, null);
+		panel_4.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(70, 72, 303, 145);
+		panel_4.add(scrollPane);
+		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+			},
+			new String[] {
+				"Number", "Amount", "Interest", "Expires"
+			}
+		));
+		scrollPane.setViewportView(table);
+		
+		JLabel lblYourCurrentInvestments = new JLabel("Your current investments:");
+		lblYourCurrentInvestments.setBounds(10, 11, 125, 14);
+		panel_4.add(lblYourCurrentInvestments);
 		
 		JPanel panel_5 = new JPanel();
 		tabbedPane.addTab("EXCHANGE", null, panel_5, null);
@@ -122,7 +151,7 @@ public class MainAppWindow extends JFrame {
 		lblCurrencyRates2.setBounds(432, 81, 347, 377);
 		panel_5.add(lblCurrencyRates2);
 		
-		JLabel lblDataProvidedBy = new JLabel("Data provided by National Bank of Poland");
+		JLabel lblDataProvidedBy = new JLabel("Data provided by the National Bank of Poland");
 		lblDataProvidedBy.setBounds(10, 11, 305, 39);
 		panel_5.add(lblDataProvidedBy);
 		

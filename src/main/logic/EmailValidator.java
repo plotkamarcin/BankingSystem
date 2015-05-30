@@ -18,7 +18,7 @@ public class EmailValidator {
 	private Properties mailServerProperties;
 	private Session mailSession;
 	private MimeMessage generateMailMessage;
-	
+
 	public Properties getMailServerProperties() {
 		return mailServerProperties;
 	}
@@ -36,39 +36,48 @@ public class EmailValidator {
 	}
 
 	public EmailValidator(Properties props, Session session) {
-		this.mailServerProperties=props;
+		this.mailServerProperties = props;
 		this.mailSession = session;
 	}
 
-	
-	public void sendVerificationEmail(String recipient, String token)
-			throws AddressException, MessagingException {
+	public void composeMessage(String recipient, String token)
+			throws MessagingException, AddressException {
 		generateMailMessage = new MimeMessage(mailSession);
-		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+		generateMailMessage.addRecipient(Message.RecipientType.TO,
+				new InternetAddress(recipient));
 		generateMailMessage.setSubject("BANKING APP VALIDATION TOKEN");
-		String emailBody = "This is your login verification token: "+token;
+		String emailBody = "This is your login verification token: " + token;
 		generateMailMessage.setContent(emailBody, "text/html");
-		prepareTransportSession();
-	
 	}
 
-	public void setMailServerProperties() throws AddressException, MessagingException {
+	public void setMailServerProperties() throws AddressException,
+			MessagingException {
 		mailServerProperties = System.getProperties();
 		mailServerProperties.put("mail.smtp.port", "587");
 		mailServerProperties.put("mail.smtp.auth", "true");
 		mailServerProperties.put("mail.smtp.starttls.enable", "true");
-        setMailSession();
+		setMailSession();
 	}
-	
-	public void setMailSession() throws AddressException, MessagingException{
+
+	public void setMailSession() throws AddressException, MessagingException {
 		mailSession = Session.getDefaultInstance(mailServerProperties, null);
-		
+
 	}
-	private void prepareTransportSession() throws MessagingException{
-		Transport transport = mailSession.getTransport("smtp");	
-		transport.connect("smtp.gmail.com", "thebankingapp2015@gmail.com", "testowaJAVA");
-		transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
+
+	private void prepareTransportSession() throws MessagingException {
+		Transport transport = mailSession.getTransport("smtp");
+		transport.connect("smtp.gmail.com", "thebankingapp2015@gmail.com",
+				"testowaJAVA");
+		transport.sendMessage(generateMailMessage,
+				generateMailMessage.getAllRecipients());
 		transport.close();
+	}
+
+	public void sendVerificationEmail(String recipient, String token)
+			throws AddressException, MessagingException {
+		composeMessage(recipient, token);
+		prepareTransportSession();
+
 	}
 
 }
