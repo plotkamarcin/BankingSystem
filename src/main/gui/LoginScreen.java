@@ -10,15 +10,20 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class LoginScreen extends JDialog {
-	private JTextField textFieldUserId;
-	private JTextField textField;
+	public JTextField textFieldUserId;
+	public JButton btnLogin = new JButton("Login");
+	public JPasswordField textFieldPassword = new JPasswordField();
 
 	public LoginScreen() {
 		setTitle("LOGIN TO SYSTEM ");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 335, 214);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		
@@ -35,21 +40,23 @@ public class LoginScreen extends JDialog {
 		getContentPane().add(textFieldUserId);
 		textFieldUserId.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setBounds(147, 92, 124, 20);
-		getContentPane().add(textField);
-		textField.setColumns(10);
 		
-		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(68, 139, 89, 23);
 		getContentPane().add(btnLogin);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(listener->{
+			System.exit(0);
+		});
 		btnCancel.setBounds(165, 139, 89, 23);
 		getContentPane().add(btnCancel);
 		
 		JLabel lblText = new JLabel("Please login with your username and password");
-		lblText.setBounds(40, -2, 231, 50);
+		lblText.setBounds(40, -2, 269, 50);
 		getContentPane().add(lblText);
+		
+		
+		textFieldPassword.setBounds(147, 92, 124, 21);
+		getContentPane().add(textFieldPassword);
 	}
 }

@@ -13,14 +13,16 @@ import javax.swing.JTextField;
 public class EmailVerification extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
+	public JTextField textField = new JTextField();
+	public JButton btnProceed = new JButton("Proceed");
 
 	/**
 	 * Create the dialog.
 	 */
 	public EmailVerification() {
 		setTitle("AUTHORIZATION REQUIRED");
-		setBounds(100, 100, 366, 221);
+		setBounds(100, 100, 412, 268);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -28,23 +30,23 @@ public class EmailVerification extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel label = new JLabel("Email Verification Code");
-			label.setBounds(10, 102, 108, 14);
+			label.setBounds(10, 120, 138, 17);
 			contentPanel.add(label);
 		}
 		{
 			textField = new JTextField();
-			textField.setBounds(147, 99, 162, 20);
+			textField.setBounds(153, 118, 162, 20);
 			textField.setColumns(10);
 			contentPanel.add(textField);
 		}
 		{
-			JButton btnProceed = new JButton("Proceed");
-			btnProceed.setBounds(136, 148, 89, 23);
+			
+			btnProceed.setBounds(150, 178, 89, 23);
 			contentPanel.add(btnProceed);
 		}
 		{
 			JLabel lblPleaseEnterVerification = new JLabel("Please enter verification code sent to your email address:");
-			lblPleaseEnterVerification.setBounds(46, 11, 276, 50);
+			lblPleaseEnterVerification.setBounds(10, 11, 350, 50);
 			contentPanel.add(lblPleaseEnterVerification);
 		}
 	}

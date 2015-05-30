@@ -10,8 +10,12 @@ public class Customer {
 	private String socialId;
 	private String yearOfBirth;
 	boolean isActive=false;
+	private String email;
 	
-    public String getName() {
+    public String getEmail() {
+		return email;
+	}
+	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
@@ -23,10 +27,11 @@ public class Customer {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+	
 
 	
 	public Customer(int id, String name, String surname, String city,
-			String street, String socialId, String yearOfBirth, boolean isActive) {
+			String street, String socialId, String yearOfBirth, boolean isActive,String email) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
@@ -35,6 +40,7 @@ public class Customer {
 		this.socialId = socialId;
 		this.yearOfBirth = yearOfBirth;
 		this.isActive = isActive;
+		this.email=email;
 	}
 
 }

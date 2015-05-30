@@ -32,11 +32,18 @@ public class DatabaseOperatorTest {
 		assertThat(temp[1],is("12345QwertY"));
 	}
 	@Test
-	public void shouldCreateCustomersTable() throws SQLException{
+	public void shouldCreateTableWithCustomers() throws SQLException{
 		ArrayList<Customer> temp;
 		sut.connectToDatabase("Banking.mdb");
 		temp=sut.getAllCustomers();
 		assertThat(temp.size(),is(not(0)));
+	}
+	@Test
+	public void shouldGetUserEmailAddress() throws SQLException{
+		String temp="";
+		sut.connectToDatabase("Banking.mdb");
+		temp=sut.getUserEmailAddress("kowalmaster");
+		assertThat(temp,is("igor.avz@gmail.com"));
 	}
 	@Test
 	public void shouldGetTableWithAllCustomers() throws SQLException{
