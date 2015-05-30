@@ -4,6 +4,11 @@ public class InterestRateCalculator {
 
 	private static double TAX_RATE=0.19;
 	
+	public static double STANDARD_INTEREST_RATE=1.50;
+	public static double PREMIUM_INTEREST_RATE=1.60;
+	public static double INTERNET_INTEREST_RATE=1.80;
+	public static double BUSINESS_INTEREST_RATE=1.85;
+	
 	public InterestRateCalculator(){
 		
 	}

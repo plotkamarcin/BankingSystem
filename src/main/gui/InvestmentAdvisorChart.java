@@ -14,32 +14,17 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
-public class InvestmentAdvisorGraph extends JFrame {
+public class InvestmentAdvisorChart extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InvestmentAdvisorGraph frame = new InvestmentAdvisorGraph();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	public JTable table = new JTable();
 
 	/**
 	 * Create the frame.
 	 */
-	public InvestmentAdvisorGraph() {
+	public InvestmentAdvisorChart() {
 		setResizable(false);
+		setAlwaysOnTop(true);
 		setTitle("Comparison Chart");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 604, 265);
@@ -52,7 +37,7 @@ public class InvestmentAdvisorGraph extends JFrame {
 		scrollPane.setBounds(50, 39, 521, 140);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
+		
 		scrollPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {

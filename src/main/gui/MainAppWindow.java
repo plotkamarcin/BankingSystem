@@ -41,6 +41,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
 
 public class MainAppWindow extends JFrame {
 
@@ -55,9 +56,11 @@ public class MainAppWindow extends JFrame {
 	public JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	public JLabel lblCurrencyRates = new JLabel("");
 	public JLabel lblCurrencyRates2 = new JLabel("");
+	public JTable investmentsTable = new JTable();
+	
+	public JButton btnCompareInvestments = new JButton("Compare");
 	
 	public JMenuItem mntmGeneratePdf = new JMenuItem("Generate PDF");
-	private JTable table;
 	/**
 	 * Create the frame.
 	 */
@@ -119,11 +122,12 @@ public class MainAppWindow extends JFrame {
 		panel_4.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(70, 72, 303, 145);
+		scrollPane.setBounds(70, 72, 303, 232);
 		panel_4.add(scrollPane);
+		investmentsTable.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		
+		investmentsTable.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null},
 			},
@@ -131,11 +135,15 @@ public class MainAppWindow extends JFrame {
 				"Number", "Amount", "Interest", "Expires"
 			}
 		));
-		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(investmentsTable);
 		
 		JLabel lblYourCurrentInvestments = new JLabel("Your current investments:");
-		lblYourCurrentInvestments.setBounds(10, 11, 125, 14);
+		lblYourCurrentInvestments.setBounds(10, 11, 177, 14);
 		panel_4.add(lblYourCurrentInvestments);
+		
+		
+		btnCompareInvestments.setBounds(497, 122, 126, 52);
+		panel_4.add(btnCompareInvestments);
 		
 		JPanel panel_5 = new JPanel();
 		tabbedPane.addTab("EXCHANGE", null, panel_5, null);
