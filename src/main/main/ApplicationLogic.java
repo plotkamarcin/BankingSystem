@@ -1,5 +1,6 @@
 package main;
 
+import static org.hamcrest.CoreMatchers.startsWith;
 import gui.EmailVerification;
 import gui.InterestRateHelper;
 import gui.InvestmentAdvisorChart;
@@ -51,17 +52,36 @@ public class ApplicationLogic {
 	private WebXmlParser xmlParser;
 	private int errorCount;
 
+	Thread t = new Thread() {
+		public void run() {
+			while (true) {
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					gui.mainWindow.lblConnetion.setText(connectionChecker
+							.checkConnection("http://www.google.pl"));
+					
+				} catch (UnknownHostException e) {
+				} catch (IOException e) {
+				}
+			}
+		}
+	};
+
 	public ApplicationLogic(ApplicationData data, ApplicationGui gui) {
 		this.data = data;
 		this.gui = gui;
-
+		t.start();
 		gui.mainWindow = new MainAppWindow();
 		gui.mainWindow.setVisible(true);
 		gui.mainWindow.setResizable(false);
 		initialise();
 		addMainWindowActionListeners(gui);
 		displayCurrencies(gui);
-		displayConnectionStatus(gui);
 	}
 
 	private void initialise() {
@@ -90,7 +110,7 @@ public class ApplicationLogic {
 					b.getReciepentAccountNumber(), tempAmount.toString(),
 					b.getDescription(), b.getDate() });
 		}
-        gui.mainWindow.transfersTable.setModel(model);
+		gui.mainWindow.transfersTable.setModel(model);
 	}
 
 	private void fillAccountsTable() {
@@ -233,15 +253,6 @@ public class ApplicationLogic {
 		gui.mainWindow.lblCurrencyRates2.setText("<html>" + temp2 + "</html>");
 	}
 
-	private void displayConnectionStatus(ApplicationGui gui) {
-		try {
-			gui.mainWindow.lblConnetion.setText(connectionChecker
-					.checkConnection("http://www.google.pl"));
-		} catch (UnknownHostException e) {
-		} catch (IOException e) {
-		}
-	}
-
 	private void addMainWindowActionListeners(ApplicationGui gui) {
 
 		gui.mainWindow.btnCompareInvestments.addActionListener(listener -> {
@@ -267,13 +278,13 @@ public class ApplicationLogic {
 				pdfString += "GENERATED: " + date.toString();
 				pdfGenerator.generateBankPdfWithContent(pdfString,
 						"exchange_rates.pdf");
-			}
-			else if(gui.mainWindow.tabbedPane.getSelectedIndex()==0){
+			} else if (gui.mainWindow.tabbedPane.getSelectedIndex() == 0) {
 				ArrayList<BankTransfer> temp = new ArrayList<BankTransfer>();
 				temp = data.getTransfers();
-				int index=gui.mainWindow.transfersTable.getSelectedRow();
+				int index = gui.mainWindow.transfersTable.getSelectedRow();
 				String result = temp.get(index).toString();
-				pdfGenerator.generateBankPdfWithContent(result, temp.get(index).getVerificationCode()+".pdf");
+				pdfGenerator.generateBankPdfWithContent(result, temp.get(index)
+						.getVerificationCode() + ".pdf");
 			}
 		});
 	}

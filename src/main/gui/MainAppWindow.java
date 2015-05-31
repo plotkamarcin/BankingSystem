@@ -52,7 +52,7 @@ public class MainAppWindow extends JFrame {
 	private JPanel contentPane;
 
 	
-	public JLabel lblConnetion = new JLabel("OFFLINE");
+	public JLabel lblConnetion = new JLabel("");
 	public JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 	public JLabel lblCurrencyRates = new JLabel("");
 	public JLabel lblCurrencyRates2 = new JLabel("");
