@@ -101,6 +101,6 @@ public class DatabaseOperatorTest {
 		sut.connectToDatabase("Banking.mdb");
 		temp=sut.getAllTransfers();
 		assertThat(temp.size(),is(not(0)));
-		assertThat(temp.size(),is(1));
+		assertThat(temp.size(),is(2));
 	}
 }

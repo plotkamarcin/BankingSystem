@@ -57,10 +57,14 @@ public class MainAppWindow extends JFrame {
 	public JLabel lblCurrencyRates = new JLabel("");
 	public JLabel lblCurrencyRates2 = new JLabel("");
 	public JTable investmentsTable = new JTable();
+	public JTable transfersTable= new JTable();
+	public JTable accountsTable = new JTable();
 	
 	public JButton btnCompareInvestments = new JButton("Compare");
 	
 	public JMenuItem mntmGeneratePdf = new JMenuItem("Generate PDF");
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -113,9 +117,41 @@ public class MainAppWindow extends JFrame {
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("TRANSFERS", null, panel_2, null);
+		panel_2.setLayout(null);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 24, 759, 239);
+		panel_2.add(scrollPane_1);
+		
+		
+		transfersTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null},
+			},
+			new String[] {
+				"New column"
+			}
+		));
+		scrollPane_1.setViewportView(transfersTable);
 		
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("ACCOUNTS", null, panel_3, null);
+		panel_3.setLayout(null);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(28, 30, 380, 265);
+		panel_3.add(scrollPane_2);
+		
+
+		accountsTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null},
+			},
+			new String[] {
+				"New column"
+			}
+		));
+		scrollPane_2.setViewportView(accountsTable);
 		
 		JPanel panel_4 = new JPanel();
 		tabbedPane.addTab("INVESTMENTS", null, panel_4, null);
@@ -124,7 +160,7 @@ public class MainAppWindow extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(70, 72, 303, 232);
 		panel_4.add(scrollPane);
-		investmentsTable.setFont(new Font("Tahoma", Font.PLAIN, 13));
+	
 		
 		
 		investmentsTable.setModel(new DefaultTableModel(

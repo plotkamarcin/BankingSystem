@@ -19,8 +19,6 @@ import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-
-
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.swing.JOptionPane;
@@ -32,12 +30,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 
-
-
 import org.objenesis.instantiator.basic.NewInstanceInstantiator;
 import org.xml.sax.SAXException;
-
-
 
 import logic.*;
 
@@ -56,8 +50,7 @@ public class ApplicationLogic {
 	private TokenGenerator tokenGenerator;
 	private WebXmlParser xmlParser;
 	private int errorCount;
-	
-	
+
 	public ApplicationLogic(ApplicationData data, ApplicationGui gui) {
 		this.data = data;
 		this.gui = gui;
@@ -70,18 +63,50 @@ public class ApplicationLogic {
 		displayCurrencies(gui);
 		displayConnectionStatus(gui);
 	}
-	
+
 	private void initialise() {
 
 		// perfomLogin();
-		fillInvestmentsTable();
 		rateCalculator = new InterestRateCalculator();
 		investmentAdvisor = new InvestmentAdvisor(rateCalculator);
 		connectionChecker = new ConnectionChecker();
 		pdfGenerator = new BankPdfGenerator();
 		xmlParser = new WebXmlParser();
+		fillInvestmentsTable();
+		fillAccountsTable();
+		fillTransfersTable();
 	}
-	
+
+	private void fillTransfersTable() {
+		ArrayList<BankTransfer> temp = data.getTransfers();
+		DefaultTableModel model = new DefaultTableModel();
+		model.setColumnIdentifiers(new String[] { "Recipent", "Recipent #",
+				"Amount", "Description", "Date" });
+		for (BankTransfer b : temp) {
+			BigDecimal tempAmount = new BigDecimal(Double.toString(b
+					.getAmount()));
+			tempAmount = tempAmount.setScale(2, RoundingMode.HALF_DOWN);
+			model.addRow(new String[] { b.getRecipent(),
+					b.getReciepentAccountNumber(), tempAmount.toString(),
+					b.getDescription(), b.getDate() });
+		}
+        gui.mainWindow.transfersTable.setModel(model);
+	}
+
+	private void fillAccountsTable() {
+		ArrayList<BankAccount> temp = data.getAccounts();
+		DefaultTableModel model = new DefaultTableModel();
+		model.setColumnIdentifiers(new String[] { "ID", "Type", "Number",
+				"Balance" });
+		for (BankAccount b : temp) {
+			BigDecimal tempBalance = new BigDecimal(Double.toString(b
+					.getBalance()));
+			tempBalance = tempBalance.setScale(2, RoundingMode.HALF_DOWN);
+			model.addRow(new String[] { Integer.toString(b.getId()),
+					b.getType(), b.getAccountNumber(), tempBalance.toString() });
+		}
+		gui.mainWindow.accountsTable.setModel(model);
+	}
 
 	private void fillInvestmentsTable() {
 		ArrayList<Investment> temp = data.getInvestments();
@@ -89,13 +114,13 @@ public class ApplicationLogic {
 		model.setColumnIdentifiers(new String[] { "Number", "Amount",
 				"Interest", "Expires" });
 		for (Investment i : temp) {
-			BigDecimal tempInterest = new BigDecimal(Double.toString(i.getInterest()));
+			BigDecimal tempInterest = new BigDecimal(Double.toString(i
+					.getInterest()));
 			BigDecimal tempSum = new BigDecimal(Double.toString(i.getAmount()));
-			tempInterest=tempInterest.setScale(2,RoundingMode.HALF_DOWN);
-			tempSum=tempSum.setScale(2,RoundingMode.HALF_DOWN);
+			tempInterest = tempInterest.setScale(2, RoundingMode.HALF_DOWN);
+			tempSum = tempSum.setScale(2, RoundingMode.HALF_DOWN);
 			model.addRow(new String[] { Integer.toString(i.getId()),
-					tempSum.toString(),
-					tempInterest.toString(), i.getExpires() });
+					tempSum.toString(), tempInterest.toString(), i.getExpires() });
 		}
 		gui.mainWindow.investmentsTable.setModel(model);
 
@@ -218,15 +243,14 @@ public class ApplicationLogic {
 	}
 
 	private void addMainWindowActionListeners(ApplicationGui gui) {
-		
 
 		gui.mainWindow.btnCompareInvestments.addActionListener(listener -> {
 			InterestRateHelper helper = new InterestRateHelper();
 			helper.setVisible(true);
-			helper.btnCalculate.addActionListener(listener2->{
+			helper.btnCalculate.addActionListener(listener2 -> {
 				calculateInterestHelp(helper);
 			});
-			helper.btnChart.addActionListener(listener3->{
+			helper.btnChart.addActionListener(listener3 -> {
 				InvestmentAdvisorChart advisor = new InvestmentAdvisorChart();
 				advisor.setVisible(true);
 				fillAdvisorChartTable(helper, advisor);
@@ -244,18 +268,25 @@ public class ApplicationLogic {
 				pdfGenerator.generateBankPdfWithContent(pdfString,
 						"exchange_rates.pdf");
 			}
+			else if(gui.mainWindow.tabbedPane.getSelectedIndex()==0){
+				ArrayList<BankTransfer> temp = new ArrayList<BankTransfer>();
+				temp = data.getTransfers();
+				int index=gui.mainWindow.transfersTable.getSelectedRow();
+				String result = temp.get(index).toString();
+				pdfGenerator.generateBankPdfWithContent(result, temp.get(index).getVerificationCode()+".pdf");
+			}
 		});
 	}
 
 	private void fillAdvisorChartTable(InterestRateHelper helper,
 			InvestmentAdvisorChart advisor) {
 		DefaultTableModel model = new DefaultTableModel();
-		model.setColumnIdentifiers(new String[]{
-				"Option", "Standard", "Premium", "Internet", "Business"
-			});
-		Object [][] temp; 
-				temp = investmentAdvisor.createValuesTable(Double.parseDouble(helper.textField.getText()));
-		for (int i=0;i<6;i++){
+		model.setColumnIdentifiers(new String[] { "Option", "Standard",
+				"Premium", "Internet", "Business" });
+		Object[][] temp;
+		temp = investmentAdvisor.createValuesTable(Double
+				.parseDouble(helper.textField.getText()));
+		for (int i = 0; i < 6; i++) {
 			model.addRow(temp[i]);
 		}
 		advisor.table.setModel(model);
@@ -263,28 +294,28 @@ public class ApplicationLogic {
 
 	private void calculateInterestHelp(InterestRateHelper helper) {
 		Double amount = Double.parseDouble(helper.textField.getText());
-		Integer months = Integer.parseInt(helper.spinnerMonths.getValue().toString());
-		Double interest=0.0;
+		Integer months = Integer.parseInt(helper.spinnerMonths.getValue()
+				.toString());
+		Double interest = 0.0;
 		String tempInterest = helper.spinnerType.getValue().toString();
-		switch(tempInterest){
+		switch (tempInterest) {
 		case "Standard":
-			interest=InterestRateCalculator.STANDARD_INTEREST_RATE;
+			interest = InterestRateCalculator.STANDARD_INTEREST_RATE;
 			break;
 		case "Business":
-			interest=InterestRateCalculator.BUSINESS_INTEREST_RATE;
+			interest = InterestRateCalculator.BUSINESS_INTEREST_RATE;
 			break;
 		case "Premium":
-			interest=InterestRateCalculator.PREMIUM_INTEREST_RATE;
+			interest = InterestRateCalculator.PREMIUM_INTEREST_RATE;
 			break;
 		case "Internet":
-			interest=InterestRateCalculator.INTERNET_INTEREST_RATE;
+			interest = InterestRateCalculator.INTERNET_INTEREST_RATE;
 			break;
 		}
-		BigDecimal temp =BigDecimal.valueOf(rateCalculator.calcualtePeriodInterest(interest, amount, months));
-		temp=temp.setScale(2,RoundingMode.HALF_DOWN);
+		BigDecimal temp = BigDecimal.valueOf(rateCalculator
+				.calcualtePeriodInterest(interest, amount, months));
+		temp = temp.setScale(2, RoundingMode.HALF_DOWN);
 		helper.lblAnswer.setText(temp.toString());
 	}
-
-
 
 }

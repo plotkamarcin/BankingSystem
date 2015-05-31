@@ -1,5 +1,6 @@
 package data;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 public class BankTransfer {
@@ -61,10 +62,17 @@ public class BankTransfer {
 		this.date = date;
 	}
 	
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+	
 	public BankTransfer(String recipent, String senderAccountNumber,
 			String reciepentAccountNumber, double amount, String description,
 			String verificationCode, String date) {
-		super();
 		this.recipent = recipent;
 		this.senderAccountNumber = senderAccountNumber;
 		this.reciepentAccountNumber = reciepentAccountNumber;
@@ -72,6 +80,12 @@ public class BankTransfer {
 		this.description = description;
 		this.verificationCode = verificationCode;
 		this.date = date;
+	}
+	@Override
+	public String toString(){
+		DecimalFormat df = new DecimalFormat("0.00");
+		return this.recipent+"\n"+this.reciepentAccountNumber+"\n"+senderAccountNumber+"\n"+df.format(this.amount)+"\n"+this.description+"\n"+this.verificationCode+"\n"+this.date+"\n";
+		
 	}
  
 }
